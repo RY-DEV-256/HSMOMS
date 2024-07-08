@@ -1,0 +1,86 @@
+{% extends 'hsmoms/doctor/base.html' %}
+
+
+{% block content %}
+<h6 class="text-muted">View Medical Records</h6>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Illness</th>
+                <th>Blood Sugar</th>
+                <th>Blood Pressure</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for history in medical_histories %}
+            <tr>
+                <td>{{ history.id }}</td>
+                <td>{{ history.patient_id.admin.get_full_name }}</td>
+                <td>{{ history.illnes }}</td>
+                <td>{{ history.blood_sugar }}</td>
+                <td>{{ history.blood_pressure }}</td>
+                <td>{{ history.status }}</td>
+                <td>
+                    <div class="d-flex">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#view{{history.id}}">
+                            view
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="view{{history.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Medical Records For {{history.patient_id.admin.get_full_name}}!</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Visit Date: {{ history.visit_date }}</h6>
+                                                <p class="card-text">
+                                                    <strong>Illness:</strong> {{ history.illnes }}<br>
+                                                    <strong>Blood Sugar:</strong> {{ history.blood_sugar }}<br>
+                                                    <strong>Blood Pressure:</strong> {{ history.blood_pressure }}<br>
+                                                    <strong>Weight:</strong> {{ history.weight }}<br>
+                                                    <strong>Height:</strong> {{ history.height }}<br>
+                                                    <strong>Body Temperature:</strong> {{ history.body_temp }}<br>
+                                                    <strong>Status:</strong> {{ history.status }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if history.status == 'unprescribed' %}
+                        <a href="{% url 'add_prescription' pk=history.id %}" class="btn btn-primary btn-sm mx-2">Add Prescription</a>
+                        {% else %}
+                        <a href="#" class="btn btn-secondary disabled btn-sm mx-2" tabindex="-1" aria-disabled="true">Prescribed</a>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No Medical History found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

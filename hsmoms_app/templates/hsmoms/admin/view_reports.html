@@ -1,0 +1,112 @@
+{% extends 'hsmoms/admin/base.html' %} 
+
+{% block content %}
+
+<h6 class="text-muted">Admin | View reports</h6>
+
+
+<div class="table-responsive">
+    
+        
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Doctor Name</th>
+        <th>Overview</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for app in reports %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ app.doctor_id.admin.get_full_name }} 
+        <td>{{ app.overview }}</td>
+        <td>{{ app.created_at }}</td>
+        <td>
+          <div class="d-flex">
+            <!--View Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-success btn-sm me-3"
+              data-bs-toggle="modal"
+              data-bs-target="#view{{app.id}}"
+            >
+              View
+            </button>
+
+            <!--View Modal -->
+            <div
+              class="modal fade"
+              id="view{{app.id}}"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                      Weekly Report Information!
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                   <h6>Submitted By:</h6>
+                   <p>Dr {{ app.doctor_id.admin.get_full_name }}</p>
+                    <h6>
+                        Date :
+                    </h6>
+                    <p>{{ app.created_at }}</p>
+                    
+                    <h6>
+                        Time Period :
+                    </h6>
+                    <p>{{ app.duration }}</p>
+                    <h6>
+                        Overview :
+                    </h6>
+                    <p class="border p-2">{{ app.overview }}</p>
+                    <h6>
+                        Outcomes :
+                    </h6>
+                    <p class="border p-2">{{ app.outcomes }}</p>
+                    <h6>
+                        Challenges :
+                    </h6>
+                    <p class="border p-2">{{ app.challenges }}</p>
+                    <h6>
+                        Recommendations :
+                    </h6>
+                    <p class="border p-2">{{ app.recommendations }}</p>
+                    <h6>
+                        Conclusion :
+                    </h6>
+                    <p class="border p-2">{{ app.conclusion }}</p>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+</div>
+ {% endblock content %}

@@ -1,0 +1,100 @@
+{% extends "hsmoms/doctor/base.html" %}
+
+
+{% block content %}
+<h6 class="text-muted">Manage Reports</h6>
+<div class="d-flex justify-content-end">
+    <a href="{% url 'doc_create_report' %}" class="btn btn-primary btn-sm mb-2">Create A Report</a>
+
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Overview</th>
+                <th>Outcomes</th>
+                <th>Time Period</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in weekly_reports %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ report.overview }}</td>
+                <td>{{ report.outcomes }}</td>
+                <td>{{ report.duration }}</td>
+               
+                <td>
+                    <div class="d-flex">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success btn-sm me-2" data-bs-toggle="modal"
+                            data-bs-target="#view{{report.id}}">
+                            view
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="view{{report.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Report Information!</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="duration" class="form-label fw-bold">Time period</label>
+                                                <input type="text" class="form-control text-muted" id="duration" value="{{ report.duration }}" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="overview" class="form-label fw-bold">Overview</label>
+                                                <textarea class="form-control text-muted" id="overview" rows="3" disabled>{{ report.overview }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="outcomes" class="form-label fw-bold">Outcomes</label>
+                                                <textarea class="form-control text-muted" id="outcomes" rows="3" disabled>{{ report.outcomes }}</textarea>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="challenges" class="form-label fw-bold">Challenges</label>
+                                                <textarea class="form-control text-muted" id="challenges" rows="3" disabled>{{ report.challenges }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="recommendations" class="form-label fw-bold">Recommendations</label>
+                                                <textarea class="form-control text-muted" id="recommendations" rows="3" disabled>{{ report.recommendations }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="conclusion" class="form-label fw-bold">Conclusion</label>
+                                                <textarea class="form-control text-muted" id="conclusion" rows="3" disabled>{{ report.conclusion }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="created_at" class="form-label fw-bold">Created At</label>
+                                                <input type="text" class="form-control text-muted" id="created_at" value="{{ report.created_at }}" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="updated_at" class="form-label fw-bold">Updated At</label>
+                                                <input type="text" class="form-control text-muted" id="updated_at" value="{{ report.updated_at }}" disabled>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'edit_weekly_report' pk=report.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No reports found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

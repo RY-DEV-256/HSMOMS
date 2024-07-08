@@ -1,0 +1,31 @@
+{% extends 'hsmoms/patient/base.html' %}
+
+
+{% block content %}
+<h6 class="text-muted">My Profile</h6>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 my-3">
+            <img src="{{ patient.profile_pic }}" style="width:300px;height:300px;border-radius:50%;" alt="Profile Picture">
+
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ patient.admin.get_full_name }}</h5>
+                    <p class="card-text">Username: {{ patient.admin.username }}</p>
+                    <p class="card-text">Email: {{ patient.admin.email }}</p>
+                    <p class="card-text">Gender: {{ patient.gender }}</p>
+                    <p class="card-text">Age: {{ patient.age }}</p>
+                    <p class="card-text">Phone: {{ patient.phone }}</p>
+                    <p class="card-text">Address: {{ patient.address }}</p>
+                    <p class="card-text">Member Since: {{ patient.created_at | date:"F d, Y" }}</p>
+                    <p class="card-text">Last Updated: {{ patient.updated_at | date:"F d, Y" }}</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}
+    

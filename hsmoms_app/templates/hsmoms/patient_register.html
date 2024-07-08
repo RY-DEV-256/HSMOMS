@@ -1,0 +1,28 @@
+{% extends 'hsmoms/base_login.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-5">
+        <div class="col-md-5 mx-auto">
+        <p class="text-muted mb-3" style="font-size: 25px;">
+            HSMOMS | Patient Registration
+        </p>
+    
+        <div class="shadow rounded p-4">
+            <form action="" method="post" enctype="multipart/form-data" class="border rounded p-3 mt-3 mb-3">
+                <p class="text-primary">Sign up</p>
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="my-3 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary btn-sm form-control">Register</button>
+                </div>
+            <p class="d-flex my-3">Already have An Account? <small><a href="{% url 'login' %}" class="nav-link text-primary ms-3">Login</a></small></p>
+                
+            </form>
+            <div class="my-3 mb-3">
+                <p class="text-center">HSMOM SYSTEM</p>
+            </div>
+        </div>
+        <p><a href="{% url 'home' %}" class="nav-link text-primary my-3">Back home</a></p>
+        </div>
+    </div>
+{% endblock content %}

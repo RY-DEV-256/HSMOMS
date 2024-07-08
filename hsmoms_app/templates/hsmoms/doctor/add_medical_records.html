@@ -1,0 +1,15 @@
+{% extends 'hsmoms/doctor/base.html' %}
+
+
+{% block content %}
+<h6 class="text-muted">Add Medical Records</h6>
+<div class="container">
+    <form method="post" class="p-3 border rounded col-md-5 mx-auto">
+    <h6 class="my-4">Add Medical Records for {{ patient.admin.first_name }} {{ patient.admin.last_name }}</h6>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary form-control">Save</button>
+    </form>
+</div>
+{% endblock content %}
+    

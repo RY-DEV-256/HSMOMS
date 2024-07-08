@@ -1,0 +1,38 @@
+{% extends 'hsmoms/doctor/base.html' %}
+
+
+{% block content %}
+    <h6 class="text-muted">Doctor | Home</h6>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Pending Appointments</h6>
+                    <p class="card-text">{{ pending_appointments_count }}</p>
+                    <p><a href="{% url 'doc_view_appointments' %}" class="nav-link text-primary">View More Info</a></p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Active Appointments</h6>
+                    <p class="card-text">{{ active_appointments_count }}</p>
+                    <p><a href="{% url 'doc_view_appointments' %}" class="nav-link text-primary">View More Info</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Unviewed Prescription Feedback</h6>
+                    <p class="card-text">{{ unviewed_feedback_count }}</p>
+                    <p><a href="{% url 'doc_patient_feedback' %}" class="nav-link text-primary">View More Info</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

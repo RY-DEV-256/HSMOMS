@@ -1,0 +1,73 @@
+{% extends "hsmoms/doctor/base.html" %}
+
+
+{% block content %}
+    <h6 class="text-muted">Patient Feedback On Prescriptions</h6>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Outcome</th>
+                    <th>Recommendations</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in prescription_feedback %}
+                    <tr>
+                        <td>{{ feedback.patient_id.admin.get_full_name }}</td>
+                        <td>{{ feedback.outcome }}</td>
+                        <td>{{ feedback.recommendations }}</td>
+                        <td>{{ feedback.status }}</td>
+                        <td>
+                           
+                            {% if feedback.status == 'unviewed' %}
+                            <!-- Button trigger modal -->
+                   <button type="button" class="btn btn-success btn-sm me-2" data-bs-toggle="modal"
+                   data-bs-target="#completed{{entry.feedback.id}}">
+                   Viewed
+               </button>
+
+               <!-- Modal -->
+               <div class="modal fade" id="completed{{entry.feedback.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h1 class="modal-title fs-5" id="staticBackdropLabel">Feedback 
+                                   Confimation!</h1>
+                               <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                               Are you sure you have viewed and ready to respond to the feedback from 
+                               <span class="text-danger">{{ feedback.patient_id.admin.get_full_name }}</span>?
+                               <form action="{% url 'viewed_feedback' pk=feedback.id %}"
+                                   method="post" class="mt-5">
+                                   {% csrf_token %}
+                                   <button type="submit" class="btn btn-danger">Yes, I'm sure!</button>
+                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
+                                       Cancel</button>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>  {% else %}
+                   <a href="" class="btn btn-success btn-sm disabled">Viewed</a>
+
+                       {% endif %}
+                            
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No feedback found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+    

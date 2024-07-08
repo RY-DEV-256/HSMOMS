@@ -1,0 +1,56 @@
+{% extends 'hsmoms/patient/base.html' %}
+
+
+{% block content %}
+    <h6 class="text-muted">Patient | Home</h6>
+    <div class="mt-2">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 justify-content-center align-items-center" style="height: 160px;">
+                    <span class="material-symbols-outlined mb-2" style="font-size: 50px;">
+                        account_circle
+                        </span>
+                    <h6>My Profile</h6>
+                    <div class="mt-2">
+                        <a href="{% url 'my_profile' %}" class="nav-link text-primary">click here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 d-flex justify-content-center align-items-center" style="height: 160px;">
+                    <span class="material-symbols-outlined mb-2" style="font-size: 50px;">
+                        format_list_bulleted
+                        </span>
+                    <h6>My Appointments</h6>
+                    <div class="mt-2">
+                        <a href="{% url 'appointment_history' %}" class="nav-link text-primary">click here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 d-flex justify-content-center align-items-center" style="height: 160px;">
+                    <span class="material-symbols-outlined mb-2" style="font-size: 50px;">
+                        notifications
+                        </span>
+                    <h6>Reminders</h6>
+                    <div class="mt-2">
+                       <p class="d-flex"><span class="text-danger me-3">{{reminders}}</span>  <a href="{% url 'patient_reminder' %}" class="nav-link text-primary">click here</a></p> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-4 d-flex justify-content-center align-items-center" style="height: 160px;">
+                    <span class="material-symbols-outlined mb-2" style="font-size: 50px;">
+                        medical_information
+                        </span>
+                    <h6>My Medical History</h6>
+                    <div class="mt-2">
+                        <a href="{% url 'medical_history' %}" class="nav-link text-primary">click here</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}
+    

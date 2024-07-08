@@ -1,0 +1,15 @@
+{% extends "hsmoms/doctor/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h6 class="text-muted">Create a Weekly Report</h6>
+    <form action="" method="post" class="col-md-5 mx-auto p-3 border rounded">
+        <h6 class="my-3 text-muted text-center">Report Creation Form</h6>
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="my-3">
+            <button type="submit" class="btn btn-primary form-control">Submit A Report</button>
+        </div>
+    </form>
+{% endblock content %}
+    

@@ -1,0 +1,32 @@
+{% extends "hsmoms/patient/base.html" %}
+
+
+{% block content %}
+<h6 class="text-muted">Reminders History</h6>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Sent At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reminder in reminders %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ reminder.message }}</td>
+                    <td>{{ reminder.send_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">No Reminder History found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+    

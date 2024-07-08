@@ -1,0 +1,38 @@
+{% extends 'hsmoms/patient/base.html' %}
+
+
+{% block content %}
+<h6 class="text-muted">Feedback History</h6>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Prescription ID</th>
+                <th>Outcome</th>
+                <th>Recommendations</th>
+                <th>Status</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedbacks %}
+            <tr>
+                <td>{{ feedback.id }}</td>
+                <td>{{ feedback.prescription_id.id }}</td>
+                <td>{{ feedback.outcome }}</td>
+                <td>{{ feedback.recommendations }}</td>
+                <td>{{ feedback.status }}</td>
+                <td>{{ feedback.created_at }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No feedback found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+    

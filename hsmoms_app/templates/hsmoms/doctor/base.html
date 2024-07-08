@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hsmoms Doctor Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <!-- Material Icons  -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="grid-container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{% static 'images/hsmoms-b.png'%}" alt="hsmoms-b.png">
+                    <h4>DASH<span>BOARD</span></h4>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-outlined">
+                        close
+                    </span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="{% url 'doctor_dashboard' %}" {% if request.path == '/doctor_dashboard/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        home
+                    </span>
+                    <h5>Home</h5>
+                </a>
+
+                <a href="{% url 'doc_view_appointments' %}" {% if request.path == '/doctor/view_appointments/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        book_online
+                    </span>
+                    <h5>Appointments</h5>
+                </a>
+                <a href="{% url 'doc_view_patients' %}"  {% if request.path == '/doctor/view_patients/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        patient_list
+                    </span>
+                    <h5>Patients</h5>
+                </a>
+                <a href="{% url 'doc_view_medical_records' %} "  {% if request.path == '/doctor/view_medical_records/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        medical_information
+                    </span>
+                    <h5>Medical History</h5>
+                </a>
+                <a href="{% url 'doc_view_prescriptions' %}"  {% if request.path == '/doctor/view_prescriptions/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        prescriptions
+                    </span>
+                    <h5>Prescriptions</h5>
+                </a>
+                <a href="{% url 'doc_view_changed_pres' %}"  {% if request.path == '/doctor/view_changed_prescriptions/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        prescriptions
+                    </span>
+                    <h5>Changed Pres.</h5>
+                </a>
+                <a href="{% url 'doc_manage_reports' %}"  {% if request.path == '/doctor/manage_reports/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        summarize
+                        
+                    </span>
+                    <h5>Weekly Report</h5>
+                </a>
+                <a href="{% url 'doc_patient_feedback' %}"  {% if request.path == '/doctor/patient_feedback/' %}class="active"{% endif %}>
+                    <span class="material-symbols-outlined ">
+                        mode_comment
+                        
+                    </span>
+                    <h5>Patient Feedback</h5>
+                </a>
+
+               
+
+            </div>
+        </aside>
+        <main>
+            <div class="top-navbar">
+                <div>
+                    <div class="menu" id="menu-btn">
+                        <span class="material-symbols-outlined">
+                            menu
+                        </span>
+                    </div>
+                    <h5 class="text-muted d-none d-lg-block d-xl-block">HSMOMS | DOCTOR DASHBOARD</h5>
+                </div>
+                <div class="profile me-5">
+                    <img src="{% static 'images/admin1.jpeg' %}" alt="">
+
+
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                       Doctor' Profile
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'doc_my_profile' %}">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'doc_change_password' %}">Change Password</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="container-fluid mb-5">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
+                    {% block content %}
+                    
+                    {% endblock content %}
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{% static 'js/script.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

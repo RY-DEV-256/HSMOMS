@@ -1,0 +1,26 @@
+{% extends "hsmoms/doctor/base.html" %}
+
+
+{% block content %}
+    <h6 class="text-muted">Doctor Profile</h6>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ doctor.profile_pic }}" class="img-fluid rounded-circle" alt="Profile Picture" style="width: 200px;height: 200px;">
+                    </div>
+                    <div class="col-md-8">
+                        <p class="card-text"><strong>Name:</strong> {{ doctor.admin.get_full_name }}</p>
+                        <p class="card-text"><strong>Phone:</strong> {{ doctor.phone }}</p>
+                        <p class="card-text"><strong>Email:</strong> {{ doctor.admin.email }}</p>
+                        <p class="card-text"><strong>Specialization:</strong> {{ doctor.specialization_id.field }}</p>
+                        <p class="card-text"><strong>Address:</strong> {{ doctor.address }}</p>
+                        <p class="card-text"><strong>Working Days:</strong> {{ doctor.schedule_id.working_days }}</p>
+                        <p class="card-text"><strong>Working Hours:</strong> {{ doctor.schedule_id.working_time }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

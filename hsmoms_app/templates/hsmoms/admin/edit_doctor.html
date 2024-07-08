@@ -1,0 +1,18 @@
+{% extends 'hsmoms/admin/admin_dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h6 class="text-muted">Admin | Edit Doctor</h6>
+
+    <div class="col-md-5 mx-auto">
+        <form action=""  method="post" enctype="multipart/form-data" class="p-3 border rounded">
+            <div class="text-center text-muted h5 mb-3">Edit Doctor Information</div>
+            {% csrf_token %}
+            {{form|crispy}}
+            <div class="my-3">
+            <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+    

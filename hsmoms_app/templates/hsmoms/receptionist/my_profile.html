@@ -1,0 +1,33 @@
+{% extends "hsmoms/receptionist/base.html" %}
+
+
+{% block content %}
+<h6 class="text-muted">My Profile</h6>
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Receptionist Profile</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    {% if receptionist.profile_pic %}
+                    <img src="{{ receptionist.profile_pic }}" class="img-fluid" alt="Profile Picture">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Name:</strong> {{ receptionist.first_name }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ receptionist.admin.email }}</li>
+                        <li class="list-group-item"><strong>Phone:</strong> {{ receptionist.phone }}</li>
+                        <li class="list-group-item"><strong>Address:</strong> {{ receptionist.address }}</li>
+                        <li class="list-group-item"><strong>Created At:</strong> {{ receptionist.created_at }}</li>
+                        <li class="list-group-item"><strong>Updated At:</strong> {{ receptionist.updated_at }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

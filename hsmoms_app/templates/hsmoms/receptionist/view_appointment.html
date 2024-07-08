@@ -1,0 +1,142 @@
+{% extends "hsmoms/receptionist/base.html" %}
+
+
+{% block content %}
+<h6 class="text-muted">Appointments</h6>
+<div class="table-responsive">
+    
+        
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Doctor Name</th>
+          <th>Patient Name</th>
+          <th>Date/Time</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        {% for app in appointments %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ app.doctor_id.admin.get_full_name }}</td>
+          <td>{{ app.patient_id.admin.get_full_name }}</td>
+          <td>{{ app.date }}/{{ app.time }} </td>
+          <td>{{ app.status }}</td>
+          <td>
+            <div class="d-flex">
+              <!--View Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-success btn-sm me-3"
+                data-bs-toggle="modal"
+                data-bs-target="#view{{app.id}}"
+              >
+                View
+              </button>
+  
+              <!--View Modal -->
+              <div
+                class="modal fade"
+                id="view{{app.id}}"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                        Appointments Information!
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                     
+                      <div class="">
+                        <label>Doctor Name :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.doctor_id.admin.get_full_name }}"
+                          class="form-control"
+                        />
+                        <label>Patient Name :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.patient_id.admin.get_full_name }}"
+                          class="form-control"
+                        />
+                        <label>Date :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.date }}"
+                          class="form-control"
+                        />
+                        <label>Time :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.time }}"
+                          class="form-control"
+                        />
+                        <label>Status :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.status }}"
+                          class="form-control"
+                        />
+                        <label>Consultancy Fee :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.consultancy_fee }}"
+                          class="form-control"
+                        />
+  
+                        <label>Created At :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.created_at }}"
+                          class="form-control"
+                        />
+  
+                        <label>Updated At :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.updated_at }}"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+  
+  </div>
+{% endblock content %}
+    

@@ -1,0 +1,125 @@
+{% extends "hsmoms/receptionist/base.html" %}
+
+
+{% block content %}
+<h6 class="text-muted">Patient Feedback</h6>
+<div class="table-responsive">  
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Patient Name</th>
+          <th>Outcome</th>
+          <th>Recommendation</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        {% for app in feedback %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ app.patient_id.admin.get_full_name }}</td>
+          <td>{{ app.outcome }} </td>
+          <td>{{ app.recommendations }} </td>
+          <td>{{ app.status }}</td>
+          <td>
+            <div class="d-flex">
+              <!--View Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-success btn-sm me-3"
+                data-bs-toggle="modal"
+                data-bs-target="#view{{app.id}}"
+              >
+                View
+              </button>
+  
+              <!--View Modal -->
+              <div
+                class="modal fade"
+                id="view{{app.id}}"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                        Patient Feedback Prescription Info!
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                     
+                      <div class="">
+                      
+                        <label>Patient Name :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.patient_id.admin.get_full_name }}"
+                          class="form-control"
+                        />
+                        <label>Outcomes :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.outcome }}"
+                          class="form-control"
+                        />
+                        <label>Recommendations :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.recommendations }}"
+                          class="form-control"
+                        />
+                        <label>Status :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.status }}"
+                          class="form-control"
+                        />
+                        
+                        <label>Created At :</label>
+                        <input
+                          type="text"
+                          disabled
+                          placeholder="{{ app.created_at }}"
+                          class="form-control"
+                        />
+  
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No Feedback queries found.</td>
+                    </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+  
+  </div>
+{% endblock content %}
+    

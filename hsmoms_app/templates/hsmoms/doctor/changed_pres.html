@@ -1,0 +1,104 @@
+{% extends "hsmoms/doctor/base.html" %}
+
+
+{% block content %}
+    <h6 class="text-muted">View Changed Prescriptions</h6>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Medication</th>
+                <th>Dosage</th>
+                <th>Instructions</th>
+                <th>status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in new_prescriptions_with_patient_info %}
+                <tr>
+                    <td>{{ entry.patient_name }}</td>
+                    <td>{{ entry.new_prescription.medication }}</td>
+                    <td>{{ entry.new_prescription.dosage }}</td>
+                    <td>{{ entry.new_prescription.instructions }}</td>
+                    <td>{{ entry.new_prescription.status }}</td>
+                    <td>
+                        <div class="d-flex">
+                            <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#view{{entry.new_prescription.id}}">
+    view
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="view{{entry.new_prescription.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Changed Prescription Information!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Patient Name:</strong> <span class="text-muted">{{ entry.patient_name }}</span></h5>
+                    <p class="card-text"><strong>Medication:</strong> <span class="text-muted">{{ entry.new_prescription.medication }}</span></p>
+                    <p class="card-text"><strong>Dosage:</strong> <span class="text-muted">{{ entry.new_prescription.dosage }}</span></p>
+                    <p class="card-text"><strong>Instructions:</strong> <span class="text-muted">{{ entry.new_prescription.instructions }}</span></p>
+                    <p class="card-text"><strong>Reason:</strong> <span class="text-muted">{{ entry.new_prescription.reason }}</span></p>
+                    <p class="card-text"><strong>Status:</strong> <span class="text-muted">{{ entry.new_prescription.status }}</span></p>
+                    <p class="card-text"><strong>Created At:</strong> <span class="text-muted">{{ entry.new_prescription.created_at }}</span></p>
+                </div>
+            </div>
+        </div>
+   
+      </div>
+    </div>
+  </div>
+                            {% if entry.new_prescription.status == 'on_going' %}
+                                 <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
+                        data-bs-target="#completed{{entry.new_prescription.id}}">
+                        completed
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="completed{{entry.new_prescription.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Completed prescription
+                                        Confimation!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure this prescription for 
+                                    <span class="text-danger">{{ entry.patient_name }}</span> has been completed?
+                                    <form action="{% url 'completed_newprescription' pk=entry.new_prescription.id %}"
+                                        method="post" class="mt-5">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Yes, I'm sure!</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
+                                            Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  {% else %}
+                        <a href="" class="btn btn-warning btn-sm me-3 disabled">completed</a>
+
+                            {% endif %}
+                                
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No prescriptions found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+    

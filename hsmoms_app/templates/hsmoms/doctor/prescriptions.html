@@ -1,0 +1,87 @@
+{% extends "hsmoms/doctor/base.html" %}
+
+
+{% block content %}
+<h6 class="text-muted">View Prescriptions</h6>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient</th>
+                <th>Medication</th>
+                <th>Dosage</th>
+                <th>Instructions</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prescription in prescriptions %}
+            <tr>
+                <td>{{ prescription.id }}</td>
+                <td>{{ prescription.medical_history_id.patient_id.admin.get_full_name }}</td>
+                <td>{{ prescription.medication }}</td>
+                <td>{{ prescription.dosage }}</td>
+                <td>{{ prescription.instructions }}</td>
+                <td>{{ prescription.status }}</td>
+                <td>
+                    <div class="d-flex">
+                        {% if prescription.status == 'completed' %}
+                        <a href="" class="btn btn-warning btn-sm me-3 disabled">completed</a>
+                        <a href="{% url 'change_prescription' pk=prescription.id %}"
+                            class="btn btn-primary btn-sm disabled">change</a>
+                        {% endif %}
+                        {% if prescription.status == 'changed' %}
+                        <a href="" class="btn btn-warning btn-sm me-3 disabled">completed</a>
+                        <a href="{% url 'change_prescription' pk=prescription.id %}"
+                            class="btn btn-primary btn-sm disabled">change</a>
+                        {% endif %}
+                        {% if prescription.status == 'on_going' %}
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
+                            data-bs-target="#completed{{prescription.id}}">
+                            completed
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="completed{{prescription.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Completed prescription
+                                            Confimation!</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure this prescription for 
+                                        <span class="text-danger">{{prescription.medical_history_id.patient_id.admin.get_full_name }}</span> has been completed?
+                                        <form action="{% url 'completed_prescription' pk=prescription.id %}"
+                                            method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Yes, I'm sure!</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
+                                                Cancel</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'change_prescription' pk=prescription.id %}"
+                            class="btn btn-primary btn-sm">change</a>
+                        {% endif %}
+
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No prescriptions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "hsmoms/doctor/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h6 class="text-muted">Change Prescription</h6>
+
+    <form action="" method="post" class="p-3 border rounded col-md-5 mx-auto">
+        <h6 class="text-muted">Change Prescription for {{ pres.patient_id.admin.first_name }} {{ pres.patient_id.admin.last_name }}</h6>
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="my-3">
+            <button type="submit" class="form-control btn btn-primary">Save</button>
+        </div>
+    </form>
+{% endblock content %}
+    

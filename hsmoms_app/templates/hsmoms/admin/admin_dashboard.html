@@ -1,0 +1,83 @@
+{% extends 'hsmoms/admin/base.html' %}
+
+
+{% block content %}
+<h6 class="text-muted">Admin | Home</h6>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="p-4 rounded bg-primary justify-content-center align-items-center" style="height: 180px;">
+                <span class="material-symbols-outlined mb-2" style="font-size: 50px;color: white;">
+                    account_circle
+                    </span>
+                <h6 class="text-white">Total Users</h6>
+                <p class="text-white">{{ users_count }}</p>
+                <div class="">
+                    <a href="" class="nav-link text-white"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="p-4 rounded bg-primary justify-content-center align-items-center" style="height: 180px;">
+                <span class="material-symbols-outlined mb-2" style="font-size: 50px;color: white;">
+                    account_circle
+                    </span>
+                <h6 class="text-white">Total Doctors</h6>
+                <p class="text-white">{{ doctors_count }}</p>
+                <div class="">
+                    <a href="{% url 'manage_doctors' %}" class="nav-link text-white">view more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="p-4 rounded bg-primary justify-content-center align-items-center" style="height: 180px;">
+                <span class="material-symbols-outlined mb-2" style="font-size: 50px;color: white;">
+                    account_circle
+                    </span>
+                <h6 class="text-white">Total Patients</h6>
+                <p class="text-white">{{ patients_count }}</p>
+                <div class="">
+                    <a href="{% url 'manage_patients' %}" class="nav-link text-white">view more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="p-4 rounded bg-primary justify-content-center align-items-center" style="height: 180px;">
+                <span class="material-symbols-outlined mb-2" style="font-size: 50px;color: white;">
+                    account_circle
+                    </span>
+                <h6 class="text-white">Total Receptionists</h6>
+                <p class="text-white">{{ receptionists_count }}</p>
+                <div class="">
+                    <a href="{% url 'manage_receptionists' %}" class="nav-link text-white">view more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="p-4 rounded bg-warning justify-content-center align-items-center" style="height: 180px;">
+                <span class="material-symbols-outlined mb-2" style="font-size: 50px;color: white;">
+                    book_online
+                    </span>
+                <h6 class="text-white">Pending Appointments</h6>
+                <p class="text-white">{{ appointments_count }}</p>
+                <div class="">
+                    <a href="{% url 'view_appointments' %}" class="nav-link text-white">view more</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="p-4 rounded bg-warning justify-content-center align-items-center" style="height: 180px;">
+                <span class="material-symbols-outlined mb-2" style="font-size: 50px;color: white;">
+                    mode_comment
+                    </span>
+                <h6 class="text-white">Unviewed Feedback</h6>
+                <p class="text-white">{{ prescription_feedback_count }}</p>
+                <div class="">
+                    <a href="{% url 'feedback_on_prescriptions' %}" class="nav-link text-white">view more</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+{% endblock content %}
+    
